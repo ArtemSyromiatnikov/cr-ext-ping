@@ -1,100 +1,35 @@
-<html ng-app="pingApp">
+<!DOCTYPE html>
+<html ng-app="pingApp" ng-csp>
 	<head>
 		<title>Ping!</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
-		<style>
-			body {
-				width: 420px;
-				font-family: 'Open Sans', sans-serif;
-				background-color: #fafafa;
-				margin: 20px;
-			}
-			header {
-				margin-bottom: 20px;
-			}
-			.center { text-align: center; }
-			.btn {
-				background-color: #4285f4;
-				color: #FFF;
-				text-transform: uppercase;
-				padding: 10px 20px;
-				border: none;
-				border-radius: 3px;
-				box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px,
-					rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px,
-					rgba(0, 0, 0, 0.2) 0px 3px 1px -2px;
-				cursor: pointer;
-				outline: none;
-			}
-			.btn:active {
-				box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px; 
-			}
-			
-			.ping {
-				position: relative;
-				margin: 0 0 10px;
-				padding: 10px 15px;
-				background: #fff;
-				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-					0 1px 5px 0 rgba(0, 0, 0, 0.12),
-					0 3px 1px -2px rgba(0, 0, 0, 0.2);
-			}
-			.ping:first-of-type {
-				margin-top: 0;
-			}
-			.ping-title {
-				font-size: 20px;
-				font-weight: 300;
-			}
-			.ping-url {
-				font-size: 12px;
-				font-weight: 400;
-				color: #444;
-			}
-			.ping-timing {
-				position: absolute;
-				right: 15px;
-				bottom: 5px;
-				text-align: right;
-				font-size: 20px;
-			}
-			.timing-good {
-				color: #00695c;
-			}
-			.timing-avg {
-				color: #ff6d00;
-			}
-			.timing-bad {
-				color: #d81b60;
-			}
-			.timing-value {
-				font-size: 30px;
-				font-weight: 300;
-			}
-			.timing-units {
-				display: inline-block;
-				width: 25px;
-				margin-left: 2px;
-				text-align: left;
-				font-size: 16px;
-				font-weight: 300;
-			}
-		</style>
+		<link href='styles/font-awesome.min.css' rel='stylesheet' type='text/css'>
+		<link href='styles/angular-csp.css' rel='stylesheet' type='text/css'>
+		<link href='styles/app.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body ng-controller="pingListCtrl">
-		<header class="center">
-			<button ng-click="pingNow()" class="btn">Ping now</button>
+		<header class="header">
+			<div class="header-item"></div>
+			<div class="header-item center">
+				<button ng-click="pingNow()" class="btn">Ping now</button>
+			</div>
+			<div class="header-item right">
+				<a href="#/settings"><i class="fa fa-cog"></i></a>
+			</div>
 		</header>
 		<section>
 			
 			<div ng-repeat="probe in probes" class="ping">
-				<div class="ping-title">{{ probe.title }}</div>
-				<div class="ping-url">{{ probe.url }}</div>
-				<div class="ping-timing timing-good"><span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span></div>
+				<div class="ping-title">{{ probe.data.title }}</div>
+				<div class="ping-url">{{ probe.data.url }}</div>
+				<div class="ping-timing timing-{{ probe.quality }}">
+					<span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
+					<i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
+				</div>
 			</div>
 		</section>
 		
-		<script type="text/javascript" src="angular.min.js"></script>
-		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
 	</body>
 </html>

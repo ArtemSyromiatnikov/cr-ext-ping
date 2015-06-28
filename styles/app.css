@@ -1,0 +1,97 @@
+body {
+	width: 420px;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #fafafa;
+	margin: 20px;
+}
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+.header {
+	display: flex;
+	/*justify-content: space-between;*/
+	margin-bottom: 20px;
+}
+.header-item {
+	flex-grow: 1;
+}
+.center { text-align: center; }
+.btn {
+	background-color: #4285f4;
+	color: #FFF;
+	text-transform: uppercase;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 3px;
+	box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px,
+		rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px,
+		rgba(0, 0, 0, 0.2) 0px 3px 1px -2px;
+	cursor: pointer;
+	outline: none;
+}
+.btn:active {
+	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px; 
+}
+
+.ping {
+	position: relative;
+	margin: 0 0 10px;
+	padding: 10px 15px;
+	background: #fff;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+		0 1px 5px 0 rgba(0, 0, 0, 0.12),
+		0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+.ping:first-of-type {
+	margin-top: 0;
+}
+.ping-title {
+	font-size: 20px;
+	font-weight: 300;
+}
+.ping-url {
+	font-size: 12px;
+	font-weight: 400;
+	color: #444;
+}
+.ping-timing {
+	position: absolute;
+	right: 15px;
+	bottom: 5px;
+	text-align: right;
+	font-size: 20px;
+}
+.timing-good {
+	color: #00695c;
+}
+.timing-avg {
+	color: #ff6d00;
+}
+.timing-bad {
+	color: #d81b60;
+}
+.timing-none {
+	color: #888;
+}
+.timing-value {
+	font-size: 30px;
+	font-weight: 300;
+}
+.timing-units {
+	display: inline-block;
+	width: 25px;
+	margin-left: 2px;
+	text-align: left;
+	font-size: 16px;
+	font-weight: 300;
+}
+.timing-inProgress {
+	font-size: 12px;
+	color: #888;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
