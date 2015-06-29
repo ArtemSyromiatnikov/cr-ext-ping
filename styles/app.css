@@ -4,6 +4,19 @@ body {
 	background-color: #fafafa;
 	margin: 20px;
 }
+.cf:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+}
+.cf { display: inline-block; }
+/* start commented backslash hack \*/
+* html .cf { height: 1%; }
+.cf { display: block; }
+/* close commented backslash hack */
 .center {
 	text-align: center;
 }
@@ -11,12 +24,29 @@ body {
 	text-align: right;
 }
 .header {
-	display: flex;
-	/*justify-content: space-between;*/
+	text-align: center;
 	margin-bottom: 20px;
 }
+.header-left {
+	float:left;
+	width: 33.3333%;
+}
+.header-center {
+	float: left;
+	width: 33.3334%;
+}
+.header-right {
+	float: right;
+	width: 33.3333%;
+	font-size: 22px;
+	line-height: 35px;
+	text-align: right;
+	
+}
 .header-item {
-	flex-grow: 1;
+	margin-right: 10px;
+	color: #4285f4;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 .center { text-align: center; }
 .btn {
