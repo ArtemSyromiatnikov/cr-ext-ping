@@ -29,7 +29,7 @@ angular.module('pingApp', [])
 						}
 					},
 					ping: function() {
-						var self = this, 
+						var self = this,
 							startTime = new Date().getTime();
 						this.inProgress = true;
 						$http.get(this.data.url)
@@ -37,7 +37,7 @@ angular.module('pingApp', [])
 								//console.log("SUCCESS: ", self.data.url, " - ", status);
 								self.setMs(new Date().getTime() - startTime);
 								self.inProgress = false;
-								
+
 							}).error(function(data, status) {
 								//console.warn("FAIL: ", self.data.url, " - ", status);
 								self.setMs(new Date().getTime() - startTime);
@@ -56,24 +56,13 @@ angular.module('pingApp', [])
 		};
 	})
 	.controller('pingListCtrl', function($scope, $http, probeFactory) {
-		var probes = [{
-				title: "Google",
-				url: "https://www.google.se/"
-			}, {
-				title: "Apple",
-				url: "https://www.apple.com/"
-			}, {
-				title: "Microsoft",
-				url: "https://www.microsoft.com/en-us/default.aspx"
-			}
-		];
-		probeFactory.initProbes(probes);
+		probeFactory.initProbes(PROBES);
 		$scope.probes = probeFactory.getProbes();
-		
+
 		$scope.pingNow = function() {
 			$scope.probes.forEach(function(probe){
 				probe.ping();
 			}, this);
 		};
-		
+
 	});

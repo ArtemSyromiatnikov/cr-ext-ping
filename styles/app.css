@@ -1,8 +1,12 @@
 body {
-	width: 420px;
+	/*width: 420px;*/
 	font-family: 'Open Sans', sans-serif;
 	background-color: #fafafa;
 	margin: 20px;
+}
+.content {
+	margin: 0 auto;
+	width: 420px;
 }
 .cf:after {
      visibility: hidden;
@@ -41,7 +45,7 @@ body {
 	font-size: 22px;
 	line-height: 35px;
 	text-align: right;
-	
+
 }
 .header-item {
 	margin-right: 10px;
@@ -63,7 +67,7 @@ body {
 	outline: none;
 }
 .btn:active {
-	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px; 
+	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
 }
 
 .ping {
