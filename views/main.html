@@ -1,0 +1,20 @@
+<header class="content header cf">
+  <div class="header-left">&nbsp;</div>
+  <div class="header-center">
+    <button ng-click="pingNow()" class="btn">Ping now</button>
+  </div>
+  <div class="header-right">
+    <a href="#/config" class="header-item"><i class="fa fa-cog"></i></a>
+  </div>
+</header>
+
+<section class="content">
+  <div ng-repeat="probe in probes" class="ping panel">
+    <div class="ping-title">{{ probe.data.title }}</div>
+    <div class="ping-url">{{ probe.data.url }}</div>
+    <div class="ping-timing timing-{{ probe.quality }}">
+      <span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
+      <i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,19 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
-angular.module('pingApp', [])
+angular.module('pingApp', ['ngRoute'])
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/', {
+				templateUrl: 'views/main.html',
+				controller: 'PingListCtrl'
+			})
+			.when('/config', {
+				templateUrl: 'views/config.html',
+				controller: 'ConfigCtrl'
+			})
+			.otherwise({
+				redirectTo: '/'
+			});
+	})
 	.constant("CONST", {
 		quality: {
 			good: 'good',
@@ -50,12 +64,26 @@ angular.module('pingApp', [])
 				probeData = probeDataArr;
 				probes = probeData.map(this.createProbe, this);
 			},
+			getPingDataList: function() {
+				return probeData;
+			},
 			getProbes: function() {
 				return probes;
 			}
 		};
 	})
-	.controller('pingListCtrl', function($scope, $http, probeFactory) {
+	.controller('ConfigCtrl', function($scope, probeFactory) {
+		$scope.pingDataList = probeFactory.getPingDataList();
+		$scope.saveProbe = function() {
+			$scope.pingDataList.push({
+		      title: $scope.title,
+		      url: $scope.url
+			});
+			$scope.title = '';
+			$scope.url = '';
+		};
+	})
+	.controller('PingListCtrl', function($scope, $http, probeFactory) {
 		probeFactory.initProbes(PROBES);
 		$scope.probes = probeFactory.getProbes();
 

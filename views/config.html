@@ -1,0 +1,21 @@
+<header class="content header cf">
+  <a href="#/">&lt; Back to the list</a>
+</header>
+
+<section class="content">
+  <div class="panel">
+    <ul>
+      <li ng-repeat="ping in pingDataList">
+        <div><strong>{{ping.title}}</strong><div>
+        <div>{{ping.url}}</div>
+      </li>
+    </ul>
+
+    <div>
+      <input type="text" ng-model="title" placeholder="Ping Name">
+      <input type="text" ng-model="url" placeholder="Pint URL">
+      <button class="btn" ng-click="saveProbe()">Add</button>
+    </div>
+  </div>
+
+</section>

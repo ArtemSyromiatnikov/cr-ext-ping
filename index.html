@@ -7,29 +7,13 @@
 		<link href='styles/angular-csp.css' rel='stylesheet' type='text/css'>
 		<link href='styles/app.css' rel='stylesheet' type='text/css'>
 	</head>
-	<body ng-controller="pingListCtrl">
-		<header class="content header cf">
-			<div class="header-left">&nbsp;</div>
-			<div class="header-center">
-				<button ng-click="pingNow()" class="btn">Ping now</button>
-			</div>
-			<div class="header-right">
-				<!--<a href="#/settings" class="header-item"><i class="fa fa-cog"></i></a>-->
-			</div>
-		</header>
-		<section class="content">
+	<body>
 
-			<div ng-repeat="probe in probes" class="ping">
-				<div class="ping-title">{{ probe.data.title }}</div>
-				<div class="ping-url">{{ probe.data.url }}</div>
-				<div class="ping-timing timing-{{ probe.quality }}">
-					<span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
-					<i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
-				</div>
-			</div>
-		</section>
+		<div ng-view></div>
 
-		<script type="text/javascript" src="js/angular.js"></script>
+
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
 		<script type="text/javascript" src="js/appData.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 	</body>
