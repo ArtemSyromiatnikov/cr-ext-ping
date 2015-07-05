@@ -10,6 +10,14 @@ angular.module('pingApp', ['ngRoute'])
 				templateUrl: 'views/config.html',
 				controller: 'ConfigCtrl'
 			})
+			.when('/ping/new', {
+				templateUrl: 'views/editPing.html',
+				controller: 'EditPingCtrl'
+			})
+			.when('/ping/:pingId/edit', {
+				templateUrl: 'views/editPing.html',
+				controller: 'EditPingCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
@@ -24,9 +32,8 @@ angular.module('pingApp', ['ngRoute'])
 	})
 	.factory("probeFactory", function(CONST, $http) {
 		var probeData = [],
-			probes = [];
-		return {
-			createProbe: function(probeData) {
+			probes = [],
+			createProbe = function(probeData) {
 				return {
 					data: probeData,
 					inProgress: false,
@@ -58,30 +65,49 @@ angular.module('pingApp', ['ngRoute'])
 								self.inProgress = false;
 							});
 					}
-				};
-			},
+				}
+			};
+
+		return {
 			initProbes: function(probeDataArr) {
 				probeData = probeDataArr;
-				probes = probeData.map(this.createProbe, this);
+				probes = probeData.map(createProbe, this);
 			},
 			getPingDataList: function() {
 				return probeData;
 			},
 			getProbes: function() {
 				return probes;
+			},
+			getProbe: function(id) {
+				var probe = probeData.filter(function(probe) { return probe.id === id; });
+				return probe[0];
+			},
+			createProbe: function(newProbe) {
+				newProbe.id = Math.ceil(Math.random()*1000000);
+				probeData.push(newProbe);
+				probes.push(createProbe(newProbe));
+			},
+			editProbe: function(id, data) {
+				var probe = this.getProbe(id);
+				if (probe) {
+					probe.title = data.title;
+					probe.url = data.url;
+				}
+			},
+			removeProbe: function(id) {
+				var probe = this.getProbe(id),
+					probeIx = probeData.indexOf(probe);
+				probeData.splice(probeIx, 1);
+				probes.splice(probeIx, 1);
 			}
 		};
 	})
 	.controller('ConfigCtrl', function($scope, probeFactory) {
 		$scope.pingDataList = probeFactory.getPingDataList();
-		$scope.saveProbe = function() {
-			$scope.pingDataList.push({
-		      title: $scope.title,
-		      url: $scope.url
-			});
-			$scope.title = '';
-			$scope.url = '';
-		};
+		$scope.remove = function(id) {
+			probeFactory.removeProbe(id);
+		}
 	})
 	.controller('PingListCtrl', function($scope, $http, probeFactory) {
 		probeFactory.initProbes(PROBES);
@@ -93,4 +119,33 @@ angular.module('pingApp', ['ngRoute'])
 			}, this);
 		};
 
+	})
+	.controller('EditPingCtrl', function($scope, $http, probeFactory, $location, $routeParams) {
+		var id = Number($routeParams.pingId);
+		if (id) {
+			var probe = probeFactory.getProbe(id);
+			$scope.isNew = false;
+			$scope.title = probe.title;
+			$scope.url = probe.url;
+		} else {
+			$scope.isNew = true;
+		}
+
+		$scope.saveProbe = function() {
+			if (id) {
+				probeFactory.editProbe(id, {
+			      title: $scope.title,
+			      url: $scope.url
+				});
+			} else {
+				// TODO: Add real validation!
+				if ($scope.title && $scope.url) {
+					probeFactory.createProbe({
+				        title: $scope.title,
+				        url: $scope.url
+					});
+				}
+			}
+			$location.path("/config");
+		};
 	});

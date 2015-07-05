@@ -1,0 +1,20 @@
+<header class="content header cf">
+    <a href="#/" class="btn btn-white"><i class="fa fa-chevron-left"></i> Back to the list</a>
+</header>
+
+<section class="content">
+  <div class="panel cf">
+      <div class="text-input">
+          <input type="text" ng-model="title" placeholder="Ping Name" >
+          <div class="underline"></div>
+      </div>
+      <div class="text-input">
+          <input type="text" ng-model="url" placeholder="Ping URL">
+          <div class="underline"></div>
+      </div>
+      <div class="submit-area right">
+          <a href="#/config" class="btn btn-white">Cancel</a>
+          <button class="btn" ng-click="saveProbe()">{{ isNew ? 'Add' : 'Save' }}</button>
+      </div>
+  </div>
+</section>

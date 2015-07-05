@@ -1,11 +1,15 @@
-var PROBES = [{
-      title: "Apple",
-      url: "https://www.apple.com/"
+var PROBES = [
+    {
+        id: 1,
+        title: "Apple",
+        url: "https://www.apple.com/"
     },{
-      title: "Google",
-      url: "https://www.google.se/"
+        id: 2,
+        title: "Google",
+        url: "https://www.google.se/"
     },{
-      title: "Microsoft",
-      url: "https://www.microsoft.com/en-us/"
+        id: 3,
+        title: "Microsoft",
+        url: "https://www.microsoft.com/en-us/"
     }
-  ];
+];

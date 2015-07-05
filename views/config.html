@@ -1,20 +1,21 @@
 <header class="content header cf">
-  <a href="#/">&lt; Back to the list</a>
+    <a href="#/" class="btn btn-white"><i class="fa fa-chevron-left"></i> Back to the list</a>
 </header>
 
 <section class="content">
-  <div class="panel">
-    <ul>
-      <li ng-repeat="ping in pingDataList">
-        <div><strong>{{ping.title}}</strong><div>
-        <div>{{ping.url}}</div>
+  <div class="panel panel-list cf">
+    <ul class="list">
+      <li ng-repeat="ping in pingDataList" class="list-item">
+          <a href="javascript:void(0);" class="list-item-action" ng-click="remove(ping.id)"><i class="fa fa-lg fa-trash"></i></a>
+          <a href="#/ping/{{ ping.id }}/edit">
+              <div class="ping-title">{{ping.title}}</div>
+              <div class="ping-url">{{ping.url}}</div>
+          </a>
       </li>
     </ul>
 
-    <div>
-      <input type="text" ng-model="title" placeholder="Ping Name">
-      <input type="text" ng-model="url" placeholder="Pint URL">
-      <button class="btn" ng-click="saveProbe()">Add</button>
+    <div class="submit-area submit-area-padding  right">
+        <a href="#/ping/new" class="btn">Add</a>
     </div>
   </div>
 
