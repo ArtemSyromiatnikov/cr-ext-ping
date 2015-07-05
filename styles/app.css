@@ -47,10 +47,9 @@ table {
 
 /* =============================================== */
 body {
-	/*width: 420px;*/
 	font-family: 'Open Sans', sans-serif;
 	background-color: #fafafa;
-	margin: 20px;
+	margin: 20px 0;
 }
 a {	color: #999; text-decoration: none; }
 
