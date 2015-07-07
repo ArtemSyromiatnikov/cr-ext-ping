@@ -55,7 +55,6 @@ angular.module('pingApp', ['ngRoute'])
 					.reduce(function(max, probeId) {
 						return Math.max(max, probeId);
 					}, 0);
-				console.log("new id: ", maxId + 1);
 				return maxId + 1;
 			},
 			// First-run initialization.
