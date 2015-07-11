@@ -46,8 +46,10 @@ table {
 }
 
 /* =============================================== */
-body {
+body, a, button {
 	font-family: 'Open Sans', sans-serif;
+}
+body {
 	background-color: #fafafa;
 	margin: 20px 0;
 }
@@ -84,6 +86,9 @@ a {	color: #999; text-decoration: none; }
 }
 .pull-left {
 	float: left;
+}
+.block {
+	display: block;
 }
 .inline-block {
 	display: inline-block;
@@ -125,6 +130,7 @@ a {	color: #999; text-decoration: none; }
 	background-color: #4285f4;
 	color: #FFF;
 	font-size: 14px;
+	line-height: normal;
 	text-transform: uppercase;
 	padding: 10px 20px;
 	border: none;
@@ -135,12 +141,20 @@ a {	color: #999; text-decoration: none; }
 	cursor: pointer;
 	outline: none;
 }
+.btn + .btn {
+	margin-left: 1em;
+}
 .btn:active {
 	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
 }
+.btn:focus {
+	font-weight: bold;
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+}
 .btn.btn-white {
 	background-color: #fff;
-	color: #000;}
+	color: #000;
+}
 
 .panel {
 	margin: 0 0 10px;
@@ -170,6 +184,7 @@ a {	color: #999; text-decoration: none; }
 	font-size: 14px;
 	font-weight: 400;
 	color: #999;
+	text-overflow: ellipsis;
 }
 .ping-timing {
 	position: absolute;
@@ -206,8 +221,8 @@ a {	color: #999; text-decoration: none; }
 	font-size: 12px;
 	color: #888;
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 15px;
+	right: 15px;
 }
 
 .list {
@@ -220,19 +235,18 @@ a {	color: #999; text-decoration: none; }
 .list-item:first-child {
 	border-top: none
 }
-.list-item-title {
-    font-weight: 300;
-    font-size: 20px;
-    color: #000;
-    margin-bottom: 4px;
-}
-.list-item-subtitle {
-    font-size: 14px;
+.list-item-body {
+
 }
 .list-item-action {
 	padding: 10px;
 	float: right;
-	color: #C8CFD3;
+	color: #90A4AE;
+}
+.list-item-action:hover {
+	background: #ECEFF1;
+	/* color: #fff; */
+	border-radius: 50%;
 }
 .submit-area {
 	margin-top: 15px;

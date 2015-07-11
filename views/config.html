@@ -5,9 +5,9 @@
 <section class="content">
   <div class="panel panel-list cf">
     <ul class="list">
-      <li ng-repeat="ping in probes" class="list-item">
+      <li ng-repeat="ping in probes" class="list-item cf">
           <a href="javascript:void(0);" class="list-item-action" ng-click="remove(ping.id)"><i class="fa fa-lg fa-trash"></i></a>
-          <a href="#/ping/{{ ping.id }}/edit">
+          <a href="#/ping/{{ ping.id }}/edit" class="block">
               <div class="ping-title">{{ping.title}}</div>
               <div class="ping-url">{{ping.url}}</div>
           </a>
@@ -15,7 +15,7 @@
     </ul>
 
     <div class="submit-area submit-area-padding  right">
-        <a href="#/ping/new" class="btn">Add</a>
+        <a href="#/ping/new" class="btn" tabindex="1">Add</a>
     </div>
   </div>
 

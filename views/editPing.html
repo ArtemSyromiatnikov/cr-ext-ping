@@ -3,9 +3,9 @@
 </header>
 
 <section class="content">
-  <div class="panel cf">
+  <form class="panel cf" ng-submit="saveProbe()">
       <div class="text-input">
-          <input type="text" ng-model="title" placeholder="Ping Name" >
+          <input type="text" ng-model="title" placeholder="Ping Name" autofocus>
           <div class="underline"></div>
       </div>
       <div class="text-input">
@@ -14,7 +14,7 @@
       </div>
       <div class="submit-area right">
           <a href="#/config" class="btn btn-white">Cancel</a>
-          <button class="btn" ng-click="saveProbe()">{{ isNew ? 'Add' : 'Save' }}</button>
+          <button type="submit" class="btn">{{ isNew ? 'Add' : 'Save' }}</button>
       </div>
-  </div>
+  </form>
 </section>

@@ -1,4 +1,3 @@
-/// <reference path="typings/angularjs/angular.d.ts"/>
 angular.module('pingApp', ['ngRoute'])
 	.constant("CONST", {
 		quality: {
@@ -106,6 +105,7 @@ angular.module('pingApp', ['ngRoute'])
 		$scope.probes = probeFactory.getProbes();
 		$scope.remove = function(id) {
 			probeFactory.removeProbe(id);
+			$scope.probes = probeFactory.getProbes();
 		}
 	})
 	.controller('PingListCtrl', function($scope, $http, CONST, probeFactory) {
@@ -181,7 +181,10 @@ angular.module('pingApp', ['ngRoute'])
 			$location.path("/config");
 		};
 	})
-	.config(function($routeProvider){
+	.config(function($routeProvider, $compileProvider) {
+		// Fix a.href links for chrome extension
+		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|mailto|chrome-extension):/);
+		// Set up routes
 		$routeProvider
 			.when('/', {
 				templateUrl: 'views/main.html',

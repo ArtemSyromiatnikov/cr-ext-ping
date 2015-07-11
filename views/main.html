@@ -11,10 +11,10 @@
 <section class="content">
   <div ng-repeat="probe in probes" class="ping panel">
     <div class="ping-title">{{ probe.data.title }}</div>
-    <div class="ping-url">{{ probe.data.url }}</div>
+    <a href="{{ probe.data.url }}" target="_blank" class="ping-url">{{ probe.data.url }}</a>
     <div class="ping-timing timing-{{ probe.quality }}">
       <span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
-      <i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
     </div>
+    <i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
   </div>
 </section>
