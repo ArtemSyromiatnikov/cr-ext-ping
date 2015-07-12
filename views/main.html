@@ -11,7 +11,7 @@
 <section class="content">
   <div ng-repeat="probe in probes" class="ping panel">
     <div class="ping-title">{{ probe.data.title }}</div>
-    <a href="{{ probe.data.url }}" target="_blank" class="ping-url">{{ probe.data.url }}</a>
+    <a href="{{ probe.data.url }}" target="_blank" class="link ping-url">{{ probe.data.url }}</a>
     <div class="ping-timing timing-{{ probe.quality }}">
       <span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
     </div>

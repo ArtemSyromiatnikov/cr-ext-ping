@@ -53,7 +53,11 @@ body {
 	background-color: #fafafa;
 	margin: 20px 0;
 }
-a {	color: #999; text-decoration: none; }
+a {	text-decoration: none; }
+.link {	color: #999; text-decoration: none; }
+.link:hover {
+	text-decoration: underline;
+}
 
 .content {
 	margin: 0 auto;
@@ -150,6 +154,13 @@ a {	color: #999; text-decoration: none; }
 .btn:focus {
 	font-weight: bold;
 	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+}
+.btn[disabled] {
+	box-shadow: none;
+  	background: #eaeaea;
+  	color: #a8a8a8;
+  	cursor: auto;
+  	pointer-events: none;
 }
 .btn.btn-white {
 	background-color: #fff;
@@ -267,14 +278,25 @@ a {	color: #999; text-decoration: none; }
 	text-rendering: optimizeLegibility;
 	font-size: 16px;
 	font-weight: 400;
-	line-height: 24px;
+	line-height: 2.4em;
 	outline: none;
 	box-shadow: none;
 	padding: 0;
 	background: transparent;
 	border: none;
+	padding: 0 0.5em;
+	box-sizing: border-box;
 }
 .text-input .underline {
 	display: block;
 	border-bottom: #888 solid 1px;
+}
+.css-form input.ng-invalid.ng-touched {
+	background-color: #FCE4EC;
+}
+.css-form input.ng-invalid.ng-touched + .underline {
+  border-color: #F48FB1;
+}
+.css-form input.ng-valid.ng-touched + .underline {
+  border-color: #80CBC4;
 }

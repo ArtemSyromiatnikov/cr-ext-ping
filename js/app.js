@@ -7,33 +7,7 @@ angular.module('pingApp', ['ngRoute'])
 			none: 'none'
 		}
 	})
-	.factory("utils", function() {
-		var Utils = {
-			isArray: function(a) {
-				return a && a.constructor === Array;
-			},
-			deepExtend: function(destination, source) {
-				for (var property in source) {
-					if (source[property] && source[property].constructor &&
-			     		source[property].constructor === Object) {
-			      		destination[property] = destination[property] || {};
-			      		arguments.callee(destination[property], source[property]);
-			    	} else {
-			      		destination[property] = source[property];
-			    	}
-			  	}
-			  	return destination;
-		  	},
-			deepCopy: function(source) {
-				if (source) {
-					return Utils.deepExtend({}, source);
-				}
-				return source;
-			}
-		};
-		return Utils;
-	})
-	.factory("probeFactory", function($http, utils) {
+	.factory("probeFactory", function($http) {
 		var ls = localStorage || {},
 			probeData,
 
@@ -44,7 +18,7 @@ angular.module('pingApp', ['ngRoute'])
 				return probeData || [];
 			},
 			saveProbeData = function() {
-				if (utils.isArray(probeData)) {
+				if (angular.isArray(probeData)) {
 					ls.probeData = JSON.stringify(probeData)
 				}
 			},
@@ -74,11 +48,11 @@ angular.module('pingApp', ['ngRoute'])
 
 		return {
 			getProbes: function() {
-				return probeData.map(utils.deepCopy);
+				return angular.copy(probeData);
 			},
 			getProbe: function(id) {
 				var probe = probeData.filter(function(probe) { return probe.id === id; })[0];
-				return utils.deepCopy(probe);
+				return angular.copy(probe);
 			},
 			createProbe: function(newProbe) {
 				newProbe.id = generateNewId();
@@ -108,6 +82,9 @@ angular.module('pingApp', ['ngRoute'])
 			$scope.probes = probeFactory.getProbes();
 		}
 	})
+	////////////////////////////////////////////////////////////////////
+	// Ping List Controller
+	////////////////////////////////////////////////////////////////////
 	.controller('PingListCtrl', function($scope, $http, CONST, probeFactory) {
 		var probeArr = probeFactory.getProbes();
 		$scope.probes = probeArr.map(function(probe) {
@@ -150,8 +127,10 @@ angular.module('pingApp', ['ngRoute'])
 				probe.ping();
 			}, this);
 		};
-
 	})
+	////////////////////////////////////////////////////////////////////
+	// Create/Edit Ping Controller
+	////////////////////////////////////////////////////////////////////
 	.controller('EditPingCtrl', function($scope, $http, probeFactory, $location, $routeParams) {
 		var id = Number($routeParams.pingId);
 		if (id) {
@@ -181,6 +160,9 @@ angular.module('pingApp', ['ngRoute'])
 			$location.path("/config");
 		};
 	})
+	////////////////////////////////////////////////////////////////////
+	// App Configuration
+	////////////////////////////////////////////////////////////////////
 	.config(function($routeProvider, $compileProvider) {
 		// Fix a.href links for chrome extension
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|mailto|chrome-extension):/);
