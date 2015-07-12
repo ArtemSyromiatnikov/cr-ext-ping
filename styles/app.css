@@ -211,10 +211,16 @@ a {	text-decoration: none; }
 	color: #ff6d00;
 }
 .timing-bad {
-	color: #d81b60;
+	color: #C51162;
 }
-.timing-none {
-	color: #888;
+.timing-fail {
+	color: #90A4AE;
+}
+.timing-icon {
+	display: block;
+	line-height: 42px;
+	font-size: 28px;
+	margin-right: 12px;
 }
 .timing-value {
 	font-size: 30px;

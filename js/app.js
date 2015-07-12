@@ -1,10 +1,10 @@
 angular.module('pingApp', ['ngRoute'])
 	.constant("CONST", {
 		quality: {
-			good: 'good',
-			avg: 'avg',
-			bad: 'bad',
-			none: 'none'
+			good: 'good',	// quick response
+			avg: 'avg',		// average response time
+			bad: 'bad',		// long response time
+			fail: 'fail'	// site unavailable!
 		}
 	})
 	.factory("probeFactory", function($http) {
@@ -90,17 +90,26 @@ angular.module('pingApp', ['ngRoute'])
 		$scope.probes = probeArr.map(function(probe) {
 			return {
 				data: probe,
-				inProgress: false,
 				quality: CONST.quality.none,
+				isPristine: true,		// ping was not performed yet
+				inProgress: false,
+				isFail: false,
 				ms: 0,
-				setMs: function(value) {
-					this.ms = value;
-					if (this.ms > 0 && this.ms < 500) {
-						this.quality = CONST.quality.good;
-					} else if ( this.ms < 1000) {
-						this.quality = CONST.quality.avg;
+				setStatus: function(statusCode, ms) {
+					this.isPristine = false;
+					this.isFail = statusCode === 0;
+					if (!this.isFail) {
+						this.ms = ms;
+						if (this.ms > 0 && this.ms < 500) {
+							this.quality = CONST.quality.good;
+						} else if (this.ms < 1500) {
+							this.quality = CONST.quality.avg;
+						} else {
+							this.quality = CONST.quality.bad;
+						}
 					} else {
-						this.quality = CONST.quality.bad;
+						this.ms = 0;
+						this.quality = CONST.quality.fail;
 					}
 				},
 				ping: function() {
@@ -109,13 +118,13 @@ angular.module('pingApp', ['ngRoute'])
 					this.inProgress = true;
 					$http.get(this.data.url)
 						.success(function(data, status) {
-							//console.log("SUCCESS: ", self.data.url, " - ", status);
-							self.setMs(new Date().getTime() - startTime);
+							console.log("SUCCESS: ", self.data.url, " - ", status);
+							self.setStatus(status, new Date().getTime() - startTime);
 							self.inProgress = false;
 
 						}).error(function(data, status) {
-							//console.warn("FAIL: ", self.data.url, " - ", status);
-							self.setMs(new Date().getTime() - startTime);
+							console.warn("FAIL: ", self.data.url, " - ", status);
+							self.setStatus(status, new Date().getTime() - startTime);
 							self.inProgress = false;
 						});
 				}

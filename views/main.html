@@ -12,8 +12,13 @@
   <div ng-repeat="probe in probes" class="ping panel">
     <div class="ping-title">{{ probe.data.title }}</div>
     <a href="{{ probe.data.url }}" target="_blank" class="link ping-url">{{ probe.data.url }}</a>
-    <div class="ping-timing timing-{{ probe.quality }}">
-      <span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
+    <div class="ping-timing timing-{{ probe.quality }}" ng-hide="probe.isPristine">
+        <span ng-if="probe.isFail" class="timing-icon">
+            <i class="fa fa-exclamation-triangle"></i>
+        </span>
+        <span ng-if="!probe.isFail">
+            <span class="timing-value">{{ probe.ms }}</span><span class="timing-units">ms</span>
+        </span>
     </div>
     <i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
   </div>
