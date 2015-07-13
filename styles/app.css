@@ -49,6 +49,10 @@ table {
 body, a, button {
 	font-family: 'Open Sans', sans-serif;
 }
+button {
+	background: none;
+	border: none;
+}
 body {
 	background-color: #fafafa;
 	margin: 20px 0;
@@ -256,9 +260,13 @@ a {	text-decoration: none; }
 
 }
 .list-item-action {
-	padding: 10px;
 	float: right;
+	cursor: pointer;
 	color: #90A4AE;
+	width: 38px;
+	height: 38px;
+	text-align: center;
+	font-size: 16px;
 }
 .list-item-action:hover {
 	background: #ECEFF1;

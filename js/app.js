@@ -20,6 +20,7 @@ angular.module('pingApp', ['ngRoute'])
 			saveProbeData = function() {
 				if (angular.isArray(probeData)) {
 					ls.probeData = JSON.stringify(probeData)
+					console.log("Saving probe data: ", ls.probeData);
 				}
 			},
 			generateNewId = function() {
@@ -57,21 +58,33 @@ angular.module('pingApp', ['ngRoute'])
 			createProbe: function(newProbe) {
 				newProbe.id = generateNewId();
 				probeData.push(newProbe);
+				console.log("New probe: ", newProbe);
 
 				saveProbeData();
 			},
-			editProbe: function(id, data) {
-				this.removeProbe(id);
-				this.createProbe(data);
+			saveProbe: function(data) {
+				var probe;
+				if (data.id) {
+					probe = probeData.filter(function(probe) { return probe.id === data.id; })[0];
+					if (probe) {
+						probe.title = data.title;
+						probe.url  = data.url;
+					}
+				}
+				if (!probe) {
+					data.id = generateNewId();
+					probeData.push(data);
+				}
 
 				saveProbeData();
 			},
 			removeProbe: function(id) {
-				var probe = this.getProbe(id),
+				var probe = probeData.filter(function(probe) { return probe.id === id; })[0];
 					probeIx = probeData.indexOf(probe);
-				probeData.splice(probeIx, 1);
-
-				saveProbeData();
+				if (probeIx >= 0) {
+					probeData.splice(probeIx, 1);
+					saveProbeData();
+				}
 			}
 		};
 	})
@@ -142,29 +155,16 @@ angular.module('pingApp', ['ngRoute'])
 	////////////////////////////////////////////////////////////////////
 	.controller('EditPingCtrl', function($scope, $http, probeFactory, $location, $routeParams) {
 		var id = Number($routeParams.pingId);
-		if (id) {
-			var probe = probeFactory.getProbe(id);
-			$scope.isNew = false;
-			$scope.title = probe.title;
-			$scope.url = probe.url;
-		} else {
-			$scope.isNew = true;
-		}
+		$scope.probe = probeFactory.getProbe(id);
+		$scope.isNew = !$scope.probe;
+
+		// if ($scope.isNew) {
+		// 	$scope.probe = {};
+		// }
 
 		$scope.saveProbe = function() {
-			if (id) {
-				probeFactory.editProbe(id, {
-			      title: $scope.title,
-			      url: $scope.url
-				});
-			} else {
-				// TODO: Add real validation!
-				if ($scope.title && $scope.url) {
-					probeFactory.createProbe({
-				        title: $scope.title,
-				        url: $scope.url
-					});
-				}
+			if ($scope.probe.title && $scope.probe.url) {
+				probeFactory.saveProbe($scope.probe);
 			}
 			$location.path("/config");
 		};
