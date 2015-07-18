@@ -19,7 +19,7 @@ angular.module('pingApp', ['ngRoute'])
 			},
 			saveProbeData = function() {
 				if (angular.isArray(probeData)) {
-					ls.probeData = JSON.stringify(probeData)
+					ls.probeData = JSON.stringify(probeData);
 					console.log("Saving probe data: ", ls.probeData);
 				}
 			},
