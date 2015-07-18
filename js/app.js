@@ -85,6 +85,24 @@ angular.module('pingApp', ['ngRoute'])
 					probeData.splice(probeIx, 1);
 					saveProbeData();
 				}
+			},
+			importProbes: function(probes) {
+				probeData = [];
+				if(angular.isArray(probes)) {
+					var id = 1;
+					probeData = probes
+						.filter(function(probe) {
+							return angular.isString(probe.title) && angular.isString(probe.url);
+						})
+						.map(function(probe) {
+							return {
+								id: id++,
+								title: probe.title,
+								url: probe.url
+							};
+						});
+				}
+				saveProbeData();
 			}
 		};
 	})
@@ -153,20 +171,30 @@ angular.module('pingApp', ['ngRoute'])
 	////////////////////////////////////////////////////////////////////
 	// Create/Edit Ping Controller
 	////////////////////////////////////////////////////////////////////
-	.controller('EditPingCtrl', function($scope, $http, probeFactory, $location, $routeParams) {
+	.controller('EditPingCtrl', function($scope, probeFactory, $location, $routeParams) {
 		var id = Number($routeParams.pingId);
 		$scope.probe = probeFactory.getProbe(id);
 		$scope.isNew = !$scope.probe;
-
-		// if ($scope.isNew) {
-		// 	$scope.probe = {};
-		// }
 
 		$scope.saveProbe = function() {
 			if ($scope.probe.title && $scope.probe.url) {
 				probeFactory.saveProbe($scope.probe);
 			}
 			$location.path("/config");
+		};
+	})
+	////////////////////////////////////////////////////////////////////
+	// Import/Export Json Controller
+	////////////////////////////////////////////////////////////////////
+	.controller('JsonCtrl', function($scope, probeFactory, $location) {
+		var probes = probeFactory.getProbes();
+		$scope.json = JSON.stringify(probes, ['title', 'url'], '  ');
+
+		$scope.saveJson = function() {
+			var objects = JSON.parse($scope.json || "[]");
+			probeFactory.importProbes(objects);
+
+			$location.path("/");
 		};
 	})
 	////////////////////////////////////////////////////////////////////
@@ -184,6 +212,10 @@ angular.module('pingApp', ['ngRoute'])
 			.when('/config', {
 				templateUrl: 'views/config.html',
 				controller: 'ConfigCtrl'
+			})
+			.when('/json', {
+				templateUrl: 'views/json.html',
+				controller: 'JsonCtrl'
 			})
 			.when('/ping/new', {
 				templateUrl: 'views/editPing.html',

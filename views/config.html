@@ -3,13 +3,21 @@
 </header>
 
 <section class="content">
-  <div class="panel panel-list cf">
+  <div class="panel panel-nopadding cf">
+    <div class="tabs-container">
+        <a href="#/config" class="tab tab-active">
+            Probes
+        </a>
+        <a href="#/json" class="tab">
+            Import
+        </a>
+    </div>
     <ul class="list">
       <li ng-repeat="ping in probes" class="list-item cf">
           <button type="button" ng-click="remove(ping.id)" class="list-item-action"><i class="fa fa-lg fa-trash"></i></button>
           <a href="#/ping/{{ ping.id }}/edit" class="block">
-              <div class="ping-title">{{ping.title}}</div>
-              <div class="ping-url">{{ping.url}}</div>
+              <div class="ping-title ping-ellipsis">{{ping.title}}</div>
+              <div class="ping-url ping-ellipsis">{{ping.url}}</div>
           </a>
       </li>
     </ul>

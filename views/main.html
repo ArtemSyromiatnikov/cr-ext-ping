@@ -10,8 +10,9 @@
 
 <section class="content">
   <div ng-repeat="probe in probes" class="ping panel">
-    <div class="ping-title">{{ probe.data.title }}</div>
-    <a href="{{ probe.data.url }}" target="_blank" class="link ping-url">{{ probe.data.url }}</a>
+    <div class="ping-title ping-ellipsis" title="{{ probe.data.title }}">{{ probe.data.title }}</div>
+    <a href="{{ probe.data.url }}" target="_blank" class="link ping-url ping-ellipsis">{{ probe.data.url }}</a>
+
     <div class="ping-timing timing-{{ probe.quality }}" ng-hide="probe.isPristine">
         <span ng-if="probe.isFail" class="timing-icon">
             <i class="fa fa-exclamation-triangle"></i>
