@@ -191,7 +191,12 @@ angular.module('pingApp', ['ngRoute'])
 		$scope.json = JSON.stringify(probes, ['title', 'url'], '  ');
 
 		$scope.saveJson = function() {
-			var objects = JSON.parse($scope.json || "[]");
+			var objects;
+			try {
+				objects = JSON.parse($scope.json);
+			} catch(e) {
+				objects = []
+			}
 			probeFactory.importProbes(objects);
 
 			$location.path("/");
