@@ -388,7 +388,23 @@ a {	text-decoration: none; }
 	width: 100%;
 	border: none;
 	outline: none;
-	height: 420px;
 	resize: none;
 	overflow-y: auto;
+}
+.textarea-input.import > textarea {
+    height: 340px;
+}
+.no-pings {
+    text-align: center;
+    padding: 20px 0;
+    /* line-height: 1.6em; */
+}
+.no-pings-lbl {
+    margin-bottom: 1em;
+}
+.config-no-resources {
+    text-align: center;
+    padding: 2.5em 0 1em;
+    color: #999;
+    text-transform: uppercase;
 }

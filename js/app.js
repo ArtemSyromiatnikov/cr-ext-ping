@@ -175,6 +175,11 @@ angular.module('pingApp', ['ngRoute'])
 		var id = Number($routeParams.pingId);
 		$scope.probe = probeFactory.getProbe(id);
 		$scope.isNew = !$scope.probe;
+		if ($scope.isNew) {
+			$scope.probe = {
+				url: "http://"
+			};
+		}
 
 		$scope.saveProbe = function() {
 			if ($scope.probe.title && $scope.probe.url) {

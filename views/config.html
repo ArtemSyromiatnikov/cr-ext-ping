@@ -6,13 +6,18 @@
   <div class="panel panel-nopadding cf">
     <div class="tabs-container">
         <a href="#/config" class="tab tab-active">
-            Probes
+            Resources
         </a>
         <a href="#/json" class="tab">
             Import
         </a>
     </div>
-    <ul class="list">
+
+    <div ng-hide="probes.length" class="config-no-resources">
+        None
+    </div>
+
+    <ul ng-show="probes.length" class="list">
       <li ng-repeat="ping in probes" class="list-item cf">
           <button type="button" ng-click="remove(ping.id)" class="list-item-action"><i class="fa fa-lg fa-trash"></i></button>
           <a href="#/ping/{{ ping.id }}/edit" class="block">
