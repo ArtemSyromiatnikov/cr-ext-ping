@@ -106,6 +106,29 @@ angular.module('pingApp', ['ngRoute'])
 			}
 		};
 	})
+
+	////////////////////////////////////////////////////////////////////
+	// JSON validation directive
+	////////////////////////////////////////////////////////////////////
+	.directive('json', function() {
+		return {
+			require: 'ngModel',
+			link: function(scope, elm, attrs, ctrl) {
+				ctrl.$validators.json = function(modelValue, viewValue) {
+					try {
+						JSON.parse(viewValue);
+						return true;	// it is valid JSON
+					} catch(ex) {
+						return false;	// it is invalid JSON
+					}
+				};
+			}
+		};
+	})
+
+	////////////////////////////////////////////////////////////////////
+	// Configuration page controller
+	////////////////////////////////////////////////////////////////////
 	.controller('ConfigCtrl', function($scope, probeFactory) {
 		$scope.probes = probeFactory.getProbes();
 		$scope.remove = function(id) {
@@ -114,7 +137,7 @@ angular.module('pingApp', ['ngRoute'])
 		}
 	})
 	////////////////////////////////////////////////////////////////////
-	// Ping List Controller
+	// Ping List controller (Home page)
 	////////////////////////////////////////////////////////////////////
 	.controller('PingListCtrl', function($scope, $http, CONST, probeFactory) {
 		var probeArr = probeFactory.getProbes();

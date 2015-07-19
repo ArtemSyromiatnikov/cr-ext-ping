@@ -408,3 +408,28 @@ a {	text-decoration: none; }
     color: #999;
     text-transform: uppercase;
 }
+/*.css-form textarea.ng-invalid.ng-dirty {
+	background-color: #FCE4EC;
+}
+.css-form textarea.ng-invalid.ng-dirty + .underline {
+  border-color: #F48FB1;
+}
+.css-form textarea.ng-valid.ng-dirty + .underline {
+  border-color: #80CBC4;
+}*/
+.json-validation {
+    float: left;
+    line-height: 38px;
+}
+.json-validation .fa {
+    margin-right: 5px;
+}
+.color-success {
+    color: #00695c;
+}
+.color-warn {
+    color: #ff6d00;
+}
+.color-error {
+    color: #C51162;
+}

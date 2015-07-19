@@ -13,16 +13,23 @@
         </a>
     </div>
 
-    <form name="formJson" class="panel-padding" ng-submit="saveJson()">
+    <form name="formJson" class="panel-padding css-form" ng-submit="saveJson()">
         <div class="textarea-input import">
-            <textarea ng-model="json" autofocus></textarea>
+            <textarea name="json" ng-model="json" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                autofocus="on" tabindex="1" json></textarea>
             <div class="underline"></div>
         </div>
 
 
         <div class="submit-area right">
-            <button type="button" ng-click="reset()" class="btn btn-white" tabindex="2">Reset</button>
-            <button type="submit" class="btn" tabindex="1">Save</button>
+            <!-- Validation -->
+            <div class="json-validation" ng-show="formJson.json.$dirty">
+                <span ng-show="formJson.json.$error.json" class="color-error"><i class="fa fa-exclamation-circle color-error"></i>&nbsp;JSON is invalid</span>
+                <span ng-hide="formJson.json.$error.json" class="color-success"><i class="fa fa-check-circle color-success"></i>&nbsp;JSON is valid</span>
+            </div>
+            <!-- Buttons -->
+            <button type="button" ng-click="reset()" class="btn btn-white" tabindex="3">Reset</button>
+            <button type="submit" class="btn" ng-disabled="formJson.json.$error.json" tabindex="2">Save</button>
         </div>
     </form>
   </div>
