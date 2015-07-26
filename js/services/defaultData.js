@@ -1,4 +1,4 @@
-var PROBES = [
+myApp.constant("defaultData", [
     {
         title: "Apple",
         url: "https://www.apple.com/"
@@ -9,4 +9,4 @@ var PROBES = [
         title: "Microsoft",
         url: "https://www.microsoft.com/en-us/"
     }
-];
+]);
