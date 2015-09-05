@@ -1,4 +1,6 @@
-var myApp = angular.module('pingApp', ['ngRoute']);
+window.isBackgroundPage = false;
+
+var myApp = angular.module('pingApp', ['ngRoute', 'ng']);
 
 ////////////////////////////////////////////////////////////////////
 // App Configuration
@@ -32,3 +34,7 @@ myApp.config(function($routeProvider, $compileProvider) {
 			redirectTo: '/'
 		});
 });
+
+window.testMethod = function(message) {
+	console.log(message);
+};

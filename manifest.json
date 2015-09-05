@@ -8,6 +8,9 @@
       "48": "img/icon48.png",
       "128": "img/icon128.png"
   },
+  "background": {
+      "page": "bgIndex.html"
+  },
   "browser_action": {
       "default_icon": "img/icon.png",
       "default_popup": "index.html"
