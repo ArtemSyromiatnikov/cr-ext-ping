@@ -1,24 +1,26 @@
-window.isBackgroundPage = true;
-
 var myApp = angular.module('pingBackground', ['ng']);
-myApp.controller("BgCtrl", function($interval, probeRepo, sharedTest){
-    var index = 1;
+myApp.controller("BgCtrl", function($interval, $rootScope, $log){
+    $log.info("Starting background page...");
+    $rootScope.$on("allPingsDone", function(e, viewModels) {
+        if (!viewModels) return;
 
-    sharedTest.set(Math.ceil(Math.random()*100));
-    console.log("sharedTest value: ", sharedTest.get());
+        var message,
+            failed = viewModels.reduce(function(cnt, vm) {
+                if (vm.isFail) cnt++;
+                return cnt;
+            }, 0);
 
-    $interval(function () {
-        index++;
-        var views = chrome.extension.getViews();
-        for (var i = 0; i < views.length; i++) {
-            var view = views[i];
-
-            console.log("Trying to call view... message ", index);
-
-            if (angular.isFunction(view.testMethod)) {
-                view.testMethod("Try #" + index);
-            }
+        if (failed > 0) {
+            message = failed + " of " + viewModels.length + " sites are offline!";
+        } else {
+            message = "All " + viewModels.length + " sites are online";
         }
 
-    }, 5000);
+        chrome.notifications.create({
+            type: "basic",
+            iconUrl: "img/icon128.png",
+            title: "Ping complete",
+            message: message
+        });
+    });
 });

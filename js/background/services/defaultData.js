@@ -8,5 +8,8 @@ myApp.constant("defaultData", [
     },{
         title: "Microsoft",
         url: "https://www.microsoft.com/en-us/"
+    },{
+        title: "Unreachable",
+        url: "http://atom.ia"
     }
 ]);

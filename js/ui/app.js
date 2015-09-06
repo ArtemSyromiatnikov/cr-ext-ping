@@ -1,5 +1,3 @@
-window.isBackgroundPage = false;
-
 var myApp = angular.module('pingApp', ['ngRoute', 'ng']);
 
 ////////////////////////////////////////////////////////////////////
