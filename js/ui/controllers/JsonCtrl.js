@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////
 // Import/Export Json Controller
 ////////////////////////////////////////////////////////////////////
-myApp.controller('JsonCtrl', function($scope, probeRepo, $location) {
+myApp.controller('JsonCtrl', function($scope, $location, probeRepo, pingProcessor) {
     var probes = probeRepo.getProbes(),
         originalJson = JSON.stringify(probes, ['title', 'url'], '  ');
     $scope.json = originalJson
@@ -17,6 +17,7 @@ myApp.controller('JsonCtrl', function($scope, probeRepo, $location) {
             objects = [];
         }
         probeRepo.importProbes(objects);
+        pingProcessor.refreshViewModels();         // TODO: This is too bad!
 
         $location.path("/");
     };

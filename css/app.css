@@ -78,6 +78,9 @@
 .timing-fail {
 	color: #90A4AE;
 }
+.timing-none {
+	color: #888;
+}
 .timing-icon {
 	display: block;
 	line-height: 42px;

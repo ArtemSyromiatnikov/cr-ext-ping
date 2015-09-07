@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////
 // Ping List controller (Home page)
 ////////////////////////////////////////////////////////////////////
-myApp.controller('PingListCtrl', function($scope, $http, $q, pingVMRepo, pingProcessor) {
-    $scope.probes = pingVMRepo.getViewModels();
+myApp.controller('PingListCtrl', function($scope, $http, $q, pingProcessor) {
+    $scope.probes = pingProcessor.getViewModels();
 
     $scope.pingNow = function() {
         var promises = pingProcessor.pingAll($scope.probes);
