@@ -6,7 +6,5 @@ myApp.controller('ConfigCtrl', function($scope, probeRepo, pingProcessor) {
     $scope.remove = function(id) {
         probeRepo.removeProbe(id);
         $scope.probes = probeRepo.getProbes();
-
-        pingProcessor.refreshViewModels();         // TODO: This is too bad!
     };
 });

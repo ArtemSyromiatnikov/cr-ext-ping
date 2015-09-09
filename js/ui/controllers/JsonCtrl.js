@@ -17,7 +17,6 @@ myApp.controller('JsonCtrl', function($scope, $location, probeRepo, pingProcesso
             objects = [];
         }
         probeRepo.importProbes(objects);
-        pingProcessor.refreshViewModels();         // TODO: This is too bad!
 
         $location.path("/");
     };

@@ -1,5 +1,6 @@
 myApp.factory("probeRepo", function($http, defaultData) {
     var ls = localStorage || {},
+        lastUpdate = new Date(),
         probeData,
 
         getProbeData = function() {
@@ -11,7 +12,8 @@ myApp.factory("probeRepo", function($http, defaultData) {
         saveProbeData = function() {
             if (angular.isArray(probeData)) {
                 ls.probeData = JSON.stringify(probeData);
-                console.log("Saving probe data: ", ls.probeData);
+                lastUpdate = new Date();
+                //console.log("Saving probe data: ", ls.probeData);
             }
         },
         generateNewId = function() {
@@ -42,6 +44,9 @@ myApp.factory("probeRepo", function($http, defaultData) {
         getProbes: function() {
             return angular.copy(probeData);
         },
+        isDirty: function(date) {
+            return !date || date < lastUpdate;
+        },
         getProbe: function(id) {
             var probe = probeData.filter(function(probe) { return probe.id === id; })[0];
             return angular.copy(probe);
@@ -49,7 +54,7 @@ myApp.factory("probeRepo", function($http, defaultData) {
         createProbe: function(newProbe) {
             newProbe.id = generateNewId();
             probeData.push(newProbe);
-            console.log("New probe: ", newProbe);
+            //console.log("New probe: ", newProbe);
 
             saveProbeData();
         },

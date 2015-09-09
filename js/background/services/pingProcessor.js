@@ -2,6 +2,7 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
 
     // private variables
     var isPingInProgress = false,
+        modelsReadTime = null,
         lastPingTime = null,
         viewModels;
 
@@ -10,6 +11,7 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
         //$log.log("requesting ", viewModel.data.url, "...");
         var startTime = new Date().getTime();
         viewModel.inProgress = true;
+        viewModel.isFail = false;
         viewModel.quality = CONST.quality.none;
         $http.get(viewModel.data.url)
             .success(function(data, status) {
@@ -53,6 +55,7 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
             };
         },
         initViewModels = function() {
+            modelsReadTime = new Date();
             var models = probeRepo.getProbes();
             return models.map(createViewModel);
         };
@@ -60,18 +63,22 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
     viewModels = initViewModels();
 
     return {
-        refreshViewModels: function() {
-            viewModels = initViewModels();
-        },
         getViewModels: function() {
+            if (probeRepo.isDirty(modelsReadTime)) {
+                viewModels = initViewModels();
+            }
             return viewModels;
         },
         // Creates new set of ViewModels. Returns list of Promises
         pingAll: function() {
             var promises = viewModels.map(this.pingOne);
+            var inProgressTimeout = setTimeout(function() {
+                $rootScope.$emit("pingsInProgress", viewModels);
+            }, 1500);
 
             isPingInProgress = true;
             $q.all(promises).then(function() {
+                clearTimeout(inProgressTimeout);
                 isPingInProgress = false;
                 lastPingTime = new Date();
 

@@ -1,7 +1,24 @@
 var myApp = angular.module('pingBackground', ['ng']);
-myApp.controller("BgCtrl", function($interval, $rootScope, $log, pingProcessor){
+myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, pingProcessor){
     $log.info("Starting background page...");
-    $log.info("viewModels: ", pingProcessor.getViewModels());
+
+    $rootScope.$on("pingsInProgress", function(e, viewModels) {
+        $log.info("in progress!");
+        var notFinished = viewModels.filter(function(vm) { return vm.inProgress; }),
+            failed = viewModels.filter(function(vm) { return vm.isFail; }),
+            successCount = viewModels.length - notFinished.length - failed.length;
+
+        if (notFinished.length > 0) {
+            // Show Progress!
+            chrome.notifications.create({
+                type: "progress",
+                iconUrl: "img/icon128.png",
+                title: "Ping in progress",
+                message: successCount + " sites are online, " + failed.length + " offline, " + notFinished.length + " pending",     // Smarter messages!
+                progress: Math.round((viewModels.length - notFinished.length) / viewModels.length * 100)
+            });
+        }
+    });
     $rootScope.$on("allPingsDone", function(e, viewModels) {
         if (!viewModels) return;
 

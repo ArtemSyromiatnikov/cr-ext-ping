@@ -15,7 +15,6 @@ myApp.controller('EditPingCtrl', function($scope, $location, $routeParams, probe
         if ($scope.probe.title && $scope.probe.url) {
             probeRepo.saveProbe($scope.probe);
         }
-        pingProcessor.refreshViewModels();         // TODO: This is too bad!
         $location.path("/config");
     };
 });
