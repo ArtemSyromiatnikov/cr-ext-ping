@@ -28,16 +28,16 @@ myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, pingPro
             // All up!
             chrome.notifications.create({
                 type: "basic",
-                iconUrl: "img/icon128.png",
+                iconUrl: "img/icon_success_80x80.png",
                 title: "Ping complete",
                 message: "All " + viewModels.length + " sites are online"
             });
         } else {
             chrome.notifications.create({
                 type: "list",
-                iconUrl: "img/icon128.png",
+                iconUrl: "img/icon_fail_80x80.png",
                 title: failed.length + " of " + viewModels.length + " sites are offline",
-                message: "Why?",
+                message: "",
                 items: failed.map(function(vm) {
                     return {
                         title: vm.data.title,
