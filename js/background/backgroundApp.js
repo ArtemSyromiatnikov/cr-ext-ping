@@ -12,7 +12,7 @@ myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, pingPro
             // Show Progress!
             chrome.notifications.create({
                 type: "progress",
-                iconUrl: "img/icon128.png",
+                iconUrl: "img/icon_in_progress_80x80.png",
                 title: "Ping in progress",
                 message: successCount + " sites are online, " + failed.length + " offline, " + notFinished.length + " pending",     // Smarter messages!
                 progress: Math.round((viewModels.length - notFinished.length) / viewModels.length * 100)
