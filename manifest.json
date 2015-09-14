@@ -3,7 +3,7 @@
 
   "name": "Ping",
   "description": "This extension pings web sites!",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "icons": {
       "48": "img/icon48.png",
       "128": "img/icon128.png"

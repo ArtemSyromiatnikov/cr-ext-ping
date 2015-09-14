@@ -40,9 +40,9 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
                     this.isFail = statusCode === 0;
                     if (!this.isFail) {
                         this.ms = ms;
-                        if (this.ms > 0 && this.ms < 500) {
+                        if (this.ms > 0 && this.ms < CONST.quality_good_treshold) {
                             this.quality = CONST.quality.good;
-                        } else if (this.ms < 1500) {
+                        } else if (this.ms < CONST.quality_avg_treshold) {
                             this.quality = CONST.quality.avg;
                         } else {
                             this.quality = CONST.quality.bad;
@@ -74,7 +74,7 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
             var promises = viewModels.map(this.pingOne);
             var inProgressTimeout = setTimeout(function() {
                 $rootScope.$emit("pingsInProgress", viewModels);
-            }, 1500);
+            }, CONST.notify_progress_interval_ms);
 
             isPingInProgress = true;
             $q.all(promises).then(function() {

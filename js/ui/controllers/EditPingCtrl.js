@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////
 // Create/Edit Ping Controller
 ////////////////////////////////////////////////////////////////////
-myApp.controller('EditPingCtrl', function($scope, $location, $routeParams, probeRepo, pingProcessor) {
+myApp.controller('EditPingCtrl', function($scope, $location, $routeParams, probeRepo) {
     var id = Number($routeParams.pingId);
     $scope.probe = probeRepo.getProbe(id);
     $scope.isNew = !$scope.probe;

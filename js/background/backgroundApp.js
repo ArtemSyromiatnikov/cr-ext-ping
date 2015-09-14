@@ -1,24 +1,39 @@
 var myApp = angular.module('pingBackground', ['ng']);
-myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, pingProcessor){
+
+myApp.controller("BackgroundCtrl", function($interval, $rootScope, $log, chrome, pingProcessor){
     $log.info("Starting background page...");
 
     $rootScope.$on("pingsInProgress", function(e, viewModels) {
-        $log.info("in progress!");
         var notFinished = viewModels.filter(function(vm) { return vm.inProgress; }),
             failed = viewModels.filter(function(vm) { return vm.isFail; }),
-            successCount = viewModels.length - notFinished.length - failed.length;
+            totalCount       = viewModels.length,
+            notFinishedCount = notFinished.length,
+            failedCount      = failed.length,
+            successCount     = totalCount - notFinishedCount - failedCount,
+            message;
 
-        if (notFinished.length > 0) {
+        if (notFinishedCount > 0) {
+            if (successCount > 0) {
+                if (failedCount > 0) {
+                    message = successCount + " sites are online, " + failedCount + " offline, " + notFinishedCount + " pending";
+                } else {
+                    message = successCount + " sites are online, " + notFinishedCount + " pending";
+                }
+            } else {
+                message = "No sites are online, " + failedCount + " offline, " + notFinishedCount + " pending";
+            }
+
             // Show Progress!
             chrome.notifications.create({
                 type: "progress",
-                iconUrl: "img/icon_in_progress_80x80.png",
+                iconUrl: "img/icon_in_progress_160.png",
                 title: "Ping in progress",
-                message: successCount + " sites are online, " + failed.length + " offline, " + notFinished.length + " pending",     // Smarter messages!
-                progress: Math.round((viewModels.length - notFinished.length) / viewModels.length * 100)
+                message: message,
+                progress: Math.round((totalCount - notFinishedCount) / totalCount * 100)
             });
         }
     });
+
     $rootScope.$on("allPingsDone", function(e, viewModels) {
         if (!viewModels) return;
 
@@ -28,14 +43,14 @@ myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, pingPro
             // All up!
             chrome.notifications.create({
                 type: "basic",
-                iconUrl: "img/icon_success_80x80.png",
+                iconUrl: "img/icon_success_160.png",
                 title: "Ping complete",
                 message: "All " + viewModels.length + " sites are online"
             });
         } else {
             chrome.notifications.create({
                 type: "list",
-                iconUrl: "img/icon_fail_80x80.png",
+                iconUrl: "img/icon_fail_160.png",
                 title: failed.length + " of " + viewModels.length + " sites are offline",
                 message: "",
                 items: failed.map(function(vm) {

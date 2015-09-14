@@ -32,7 +32,3 @@ myApp.config(function($routeProvider, $compileProvider) {
 			redirectTo: '/'
 		});
 });
-
-window.testMethod = function(message) {
-	console.log(message);
-};

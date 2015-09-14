@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////
 // Import/Export Json Controller
 ////////////////////////////////////////////////////////////////////
-myApp.controller('JsonCtrl', function($scope, $location, probeRepo, pingProcessor) {
+myApp.controller('JsonCtrl', function($scope, $location, probeRepo) {
     var probes = probeRepo.getProbes(),
         originalJson = JSON.stringify(probes, ['title', 'url'], '  ');
     $scope.json = originalJson
