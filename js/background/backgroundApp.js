@@ -1,6 +1,10 @@
 var myApp = angular.module('pingBackground', ['ng']);
-myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, pingProcessor){
+myApp.controller("BgCtrl", function($interval, $rootScope, $log, chrome, migrations, pingProcessor){
     $log.info("Starting background page...");
+
+    chrome.runtime.onInstalled.addListener(function(details){
+        $log.log("OnInstalled [angular context]: ", details.reason);
+    });
 
     $rootScope.$on("pingsInProgress", function(e, viewModels) {
         $log.info("in progress!");
