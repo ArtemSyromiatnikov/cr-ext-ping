@@ -71,10 +71,20 @@ myApp.factory("pingProcessor", function($http, $q, $log, $rootScope, CONST, prob
         },
         // Creates new set of ViewModels. Returns list of Promises
         pingAll: function() {
-            var promises = viewModels.map(this.pingOne);
-            var inProgressTimeout = setTimeout(function() {
-                $rootScope.$emit("pingsInProgress", viewModels);
-            }, CONST.notify_progress_interval_ms);
+            var promises = viewModels.map(this.pingOne),
+                emitInProgress = function() {
+                    $rootScope.$emit("pingsInProgress", viewModels);
+                },
+                prolongate = function() {
+                    inProgressTimeout = setTimeout(function() {     // Then repeat 'in progress' notifications every 10 secs
+                        emitInProgress();
+                        prolongate();
+                    }, CONST.notify_progress_prolongation_ms);
+                },
+                inProgressTimeout = setTimeout(function() {     // First 'in progress' notification in 5 sec
+                    emitInProgress();
+                    prolongate();
+                }, CONST.notify_progress_interval_ms);
 
             isPingInProgress = true;
             $q.all(promises).then(function() {

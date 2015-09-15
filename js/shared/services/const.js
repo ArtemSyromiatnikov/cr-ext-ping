@@ -8,5 +8,6 @@ myApp.constant("CONST", {
     },
     quality_good_treshold: 500,         // requests faster than this are 'good'
     quality_avg_treshold: 2000,         // requests faster than this are 'average'
-    notify_progress_interval_ms: 5000
+    notify_progress_interval_ms: 4000,
+    notify_progress_prolongation_ms: 12000
 });
