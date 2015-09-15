@@ -1,0 +1,174 @@
+/*************************************************/
+/*************** Application styles **************/
+/*************************************************/
+.content {
+	margin: 0 auto;
+	width: 420px;
+}
+.header {
+	margin-bottom: 20px;
+	padding: 0 15px;
+	min-height: 35px;
+}
+.header-left {
+	float:left;
+	width: 33.3333%;
+}
+.header-center {
+	float: left;
+	text-align: center;
+	width: 33.3334%;
+}
+.header-right {
+	float: right;
+	width: 33.3333%;
+	font-size: 22px;
+	min-height: 35px;
+	text-align: right;
+}
+.header-item {
+	color: #4285f4;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+	line-height: 35px;
+	padding: 0 10px;
+}
+
+.ping {
+	position: relative;
+}
+.ping:first-of-type {
+	margin-top: 0;
+}
+.ping-ellipsis {
+	max-width: 320px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.ping-title {
+	line-height: 1.2em;
+	font-size: 20px;
+	font-weight: 300;
+	color: #000;
+	margin-bottom: 4px;
+}
+.ping-url {
+	display: inline-block;
+	line-height: 1.2em;
+	font-size: 14px;
+	font-weight: 400;
+	color: #999;
+}
+.ping-timing {
+	position: absolute;
+	right: 15px;
+	bottom: 12px;
+	text-align: right;
+	font-size: 20px;
+}
+.timing-good {
+	color: #00695c;
+}
+.timing-avg {
+	color: #ff6d00;
+}
+.timing-bad {
+	color: #C51162;
+}
+.timing-fail {
+	color: #90A4AE;
+}
+.timing-none {
+	color: #888;
+}
+.timing-icon {
+	display: block;
+	line-height: 42px;
+	font-size: 28px;
+	margin-right: 12px;
+}
+.timing-value {
+	font-size: 30px;
+	font-weight: 300;
+}
+.timing-units {
+	display: inline-block;
+	width: 25px;
+	margin-left: 2px;
+	text-align: left;
+	font-size: 16px;
+	font-weight: 300;
+}
+.timing-inProgress {
+	font-size: 12px;
+	color: #888;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
+.list {}
+.list-item {
+    padding: 12px 20px;
+    border-top: #EEE solid 1px;
+}
+.list-item:first-child {
+	border-top: none
+}
+.list-item-body {
+
+}
+.list-item-action {
+    float: right;
+    cursor: pointer;
+    color: #90A4AE;
+    width: 42px;
+    height: 42px;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+    top: 2px;
+}
+.list-item-action:hover {
+	background: #ECEFF1;
+	/* color: #fff; */
+	border-radius: 50%;
+}
+.submit-area {
+	margin-top: 15px;
+}
+.submit-area-padding {
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+}
+.text-input {
+	display: block;
+	margin: 10px 0 15px;
+}
+
+.textarea-input.import > textarea {
+    height: 340px;
+}
+.no-pings {
+    text-align: center;
+    padding: 20px 0;
+    /* line-height: 1.6em; */
+}
+.no-pings-lbl {
+    margin-bottom: 1em;
+}
+.config-no-resources {
+    text-align: center;
+    padding: 2.5em 0 1em;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.json-validation {
+    float: left;
+    line-height: 38px;
+}
+.json-validation .fa {
+    margin-right: 5px;
+}
