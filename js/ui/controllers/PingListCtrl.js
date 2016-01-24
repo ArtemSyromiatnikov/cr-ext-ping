@@ -12,4 +12,11 @@ myApp.controller('PingListCtrl', function($scope, $http, $q, pingProcessor) {
             })
         });
     };
+
+    $scope.showDrawer = function() {
+        $scope.drawerVisible = true;
+    };
+    $scope.hideDrawer = function() {
+        $scope.drawerVisible = false;
+    };
 });

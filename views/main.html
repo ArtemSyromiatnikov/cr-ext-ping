@@ -1,5 +1,7 @@
 <header class="content header cf">
-  <div class="header-left">&nbsp;</div>
+  <div class="header-left">
+      <a href="javascript:void(0);" ng-click="showDrawer()" class="header-item"><i class="fa fa-bars"></i>&nbsp;</a>
+  </div>
   <div class="header-center">
     <button ng-click="pingNow()" class="btn" ng-disabled="!probes.length">Ping now</button>
   </div>
@@ -28,4 +30,20 @@
     </div>
     <i class="fa fa-refresh fa-spin timing-inProgress" ng-show="probe.inProgress"></i>
   </div>
+</section>
+
+<section class="drawer drawer-visible" ng-show="drawerVisible">
+    <div class="drawer-background" ng-click='hideDrawer()'></div>
+    <div class="drawer-panel">
+        <div class="drawer-header">
+            Ping!
+        </div>
+        <ul class="nav-list">
+            <li class="nav-subtitle">Groups</li>
+            <li class="nav-item active"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>TEST Environment</a></li>
+            <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>PROD Environment</a></li>
+            <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>Clean Cache</a></li>
+            <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-plus"></i>Create new group</a></li>
+        </ul>
+    </div>
 </section>
