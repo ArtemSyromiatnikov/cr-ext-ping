@@ -41,6 +41,13 @@ myApp.factory("probeRepo", function($http, defaultData) {
     initialize(defaultData);
 
     return {
+        getProjects: function() {
+            return [
+                { id: 1, name: "Default", active: true},
+                { id: 2, name: "TEST env", active: false},
+                { id: 3, name: "PROD env", active: false}
+            ];
+        },
         getProbes: function() {
             return angular.copy(probeData);
         },

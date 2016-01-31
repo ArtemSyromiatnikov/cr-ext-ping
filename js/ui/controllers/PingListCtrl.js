@@ -1,7 +1,9 @@
 ////////////////////////////////////////////////////////////////////
 // Ping List controller (Home page)
 ////////////////////////////////////////////////////////////////////
-myApp.controller('PingListCtrl', function($scope, $http, $q, pingProcessor) {
+myApp.controller('PingListCtrl', function($scope, $http, $q, probeRepo, pingProcessor) {
+    console.log("repo? ", probeRepo);
+    $scope.projects = probeRepo.getProjects();
     $scope.probes = pingProcessor.getViewModels();
 
     $scope.pingNow = function() {

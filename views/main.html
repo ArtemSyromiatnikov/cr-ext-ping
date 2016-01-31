@@ -40,9 +40,12 @@
         </div>
         <ul class="nav-list">
             <li class="nav-subtitle">Groups</li>
-            <li class="nav-item active"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>TEST Environment</a></li>
+            <li ng-repeat="project in projects" class="nav-item" ng-class="{active: project.active}">
+                <a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>{{ project.name }}</a>
+            </li>
+            <!--<li class="nav-item active"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>TEST Environment</a></li>
             <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>PROD Environment</a></li>
-            <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>Clean Cache</a></li>
+            <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-folder-o"></i>Clean Cache</a></li>-->
             <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-plus"></i>Create new group</a></li>
         </ul>
     </div>
